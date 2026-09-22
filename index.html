@@ -20,11 +20,11 @@
     </style>
 </head>
 
-<body class="manrope-as w-screen font-serif m-0 p-0">
+<body class="manrope-as">
     <nav class="w-full h-16 flex items-center box-border  mx-auto  justify-around bg-blue-50/60 backdrop-blur-md sticky top-0 shadow-sm ">
         <div class="flex items-center justify-around max-w-5xl w-full">
             <div class="text-blue-700 font-bold text-2xl uppercase">Luxe</div>
-            <div class="flex items-center justify-center gap-5 invisible sm:visible text-sm tracking-wide  text-black/70">
+            <div class="sm:flex items-center justify-center gap-5 [display:none] text-sm tracking-wide  text-black/70">
                 <div class="relative w-10 flex flex-col text-blue-900 font-semibold ">Home <span
                         class=" bottom-0 w-full h-[1.5px] bg-black"></span></div>
                 <div>About</div>
@@ -37,8 +37,8 @@
         </div>
     </nav>
 
-    <main class="w-full overflow-x-hidden  mx-auto box-border  ">
-        <section class="w-full max-w-5xl mx-auto box-border flex flex-col text-center  items-center justify-center py-20 bg-gradient-to-b from-white via-blue-50 to-blue-100 ">
+     <main class="">
+         <section class="w-full max-w-5xl mx-auto box-border flex flex-col text-center  items-center justify-center py-20 bg-gradient-to-b from-white via-blue-50 to-blue-100 ">
             <div class="bg-blue-200/50 rounded-2xl uppercase leading-[.18rem] text-[.6rem] tracking-[0.1rem] text-blue-800 px-4 font-semibold  py-[0.65rem]">digital excellence</div>
             <h1 class="md:text-6xl font-bold tracking- p-8 w-5/6 text-4xl">Precision Crafted <span class="text-blue-800  ">Digital Solutions</span></h1>
             <div class="text-black/65 text-lg w-4/5">
@@ -54,29 +54,30 @@
             <img class="h-75  rounded-[2rem] w-4/5"  src="https://lh3.googleusercontent.com/aida-public/AB6AXuBRZPm3snATf9OKob1VRwY_hnUKCuWZ-ZneuKVF6jX8buCmH1BKz4FlQ-IHM4jsdjgbNENEl4ssrMTBI97sz3AtmL1_CijyGFuMIWRf8ZGe_65HfV8KjeFBYt1xcr3ObU3gPkvAmf6Ov5X5jwNv2wMXLVco0ZNE8E314blGYqGLdpzthxeGja5nReqQr9VpLCR7QFnWm0gulkJG0E1vSFeajM_Un53ne6foBIBrSId3rhGtyiGkrCVM-uUWPSXiMQt3ddSLzVqXr9aV"></img>
         </section>
 
-        <section class="bg-gradient-to-b text-center from-white via-blue-50 to-blue-100 w-full">
-            <div class="py-20">
+        <section class="bg-gradient-to-b r from-white via-blue-50 to-blue-100 w-full">
+            <div class="py-20 text-center">
                 <h2 class="text-3xl font-semibold">The Standard of Excellence</h2>
                 <h3 class="text-gray-600">Our methodology combines artisanal design with engineering rigor.</h3>
             </div>
 
-            <div class="">
-                <div class="bg-white w-4/5 mx-auto rounded-3xl">
-                    <span class="bg-blue-50">logo</span>
-                    <span>Artisanal Design</span>
-                    <span>Bespoke visual identities that resonate with sophistication and modern luxury aesthetics.</span>
+            <div class="flex flex-col sm:flex-row gap-4  items-center justify-around py-20 mx-10">
+                <div class="bg-white w-11/12 h-2xl  box-border  flex flex-col justify-around items-start mx-auto rounded-3xl p-8 hover:shadow-2xl shadow-black/50  ">
+                    <span class="bg-blue-50 w-14 p-2 text-center rounded-sm hover:bg-blue-500">logo</span>
+                    <span class="text-2xl">Artisanal Design</span>
+                    <span class="text-gray-600 text-sm">Bespoke visual identities that resonate with sophistication and modern luxury aesthetics.</span>
                 </div>
-                <div class="">
-                    <div>logo</div>
-                    <div>Elite Performance</div>
-                    <div>Lightning-fast infrastructure optimized for seamless user journeys across all devices.</div>
+
+                <div class="bg-white w-11/12 h-2xl box-border shadow-lg flex flex-col justify-around items-start mx-auto rounded-3xl p-8 ">
+                    <span class="bg-blue-50 w-14 p-2 text-center rounded-sm">logo</span>
+                    <span class="text-2xl">Elite Performance</span>
+                    <span class="text-gray-600 text-sm">Lightning-fast infrastructure optimized for seamless user journeys across all devices.</span>
                 </div>
-                <div class="">
-                    <div>logo</div>
-                    <div>Secure Scaling</div>
-                    <div>Enterprise-grade security protocols integrated into every layer of your digital ecosystem.
-                    </div>
+                <div class="bg-white w-11/12 h-2xl  box-border shadow-lg flex flex-col justify-around items-start mx-auto rounded-3xl p-8 ">
+                    <span class="bg-blue-50 w-14 p-2 text-center rounded-sm">logo</span>
+                    <span class="text-2xl">Secure Scaling</span>
+                    <span class="text-gray-600 text-sm">Enterprise-grade security protocols integrated into every layer of your digital ecosystem.</span>
                 </div>
+                
             </div>
         </section> 
     </main>
