@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
+</head>
+
+<body class="w-full bg-black text-white p-2">
+    <form id="form">
+        <input class="border border-gray-500 px-3 p-1 rounded-sm outline-none" type="text" name="username"
+            placeholder="Username">
+        <input class="border border-gray-500 px-3 p-1 rounded-sm outline-none" type="text" name="email"
+            placeholder="Email">
+        <input class="border border-gray-500 px-3 p-1 rounded-sm outline-none" type="text" name="url"
+            placeholder="Enter image url">
+        <input class="px-8 bg-blue-950 border-white/30 rounded-md p-1 border" type="submit" value="Create">
+    </form>
+
+    <main id="main" class="main w-full flex-wrap gap-2 flex  mt-3">
+
+        
+    </main>
+
+    <script>
+        const form = document.getElementById("form");
+        const main = document.getElementById("main");
+        const Users = [];
+
+        let updateUser;
+
+        function render() {
+            main.innerHTML = "";
+
+            Users.forEach((val,idx)=>{
+                const card = `<div id="card" class="w-80 px-2 border border-white/20 p-2 backdrop-blur-md relative text-white bg-gray-300/20 gap-1 rounded-2xl  
+                        flex items-start justify-center flex-col">
+            <img class="w-full box-border border-gray-300/40 border h-60  object-cover   rounded-t-md " src="${val.imageUrl}"
+                alt="a image">
+            <div class="flex flex-col p-2">
+                <div class="text-4xl uppercase">${val.name}</div>
+                <div class="text-white/50">${val.email}</div>
+            </div>
+            <div>
+                <button class="px-6 cursor-pointer bg-blue-950 border border-white/20 rounded-md p-1" onClickf="delUser(${val.id})">Delete</button>
+                <button class="px-6 cursor-pointer bg-blue-950 border border-white/20 rounded-md p-1" onClickf="updateUser(${val.id})">Update</button>
+            </div>
+        </div>`;
+                main.innerHTML += card;
+            })
+        }
+
+        form.addEventListener("submit", (e) => {
+            e.preventDefault();
+            alert("hello")
+            const name = e.target[0].value;
+            const email = e.target[1].value;
+            const imageUrl = e.target[2].value;
+
+            if (name.trim() === "" || email.trim() === "" || imageUrl.trim() === "") {
+                alert("all feild are required");
+                return;
+            }
+
+            const User = {
+                id: Date.now(),
+                name,
+                email,
+                imageUrl
+            };
+
+            if (updateUser) {
+                const id = Users.findIndex((obj) => obj.id === updateUser);
+                Users[id] = User;
+                updateUser = null;
+            } else {
+                Users.push(User);
+            }
+
+            
+            
+            render();
+        })
+
+
+        function delUser(id){
+            if(!id) return;
+            Users = Users.filter((val)=>val.id != id);
+
+            render();
+        }
+
+        function updateUser(id){
+            if(!id) return;
+            let user = Users.find((val)=>val.id == id);
+            updateUser = id;
+
+            form[0] = user.name;
+            form[1] = user.email;
+            form[2] = user.imageUrl;
+        }
+
+    </script>
+
+</body>
+
+</html>
