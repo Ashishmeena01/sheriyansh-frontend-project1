@@ -27,7 +27,7 @@
     <script>
         const form = document.getElementById("form");
         const main = document.getElementById("main");
-        const Users = [];
+        let Users = [];
 
         let updateUser;
 
@@ -44,8 +44,8 @@
                 <div class="text-white/50">${val.email}</div>
             </div>
             <div>
-                <button class="px-6 cursor-pointer bg-blue-950 border border-white/20 rounded-md p-1" onClickf="delUser(${val.id})">Delete</button>
-                <button class="px-6 cursor-pointer bg-blue-950 border border-white/20 rounded-md p-1" onClickf="updateUser(${val.id})">Update</button>
+                <button class="px-6 cursor-pointer bg-blue-950 border border-white/20 rounded-md p-1" onclick="delUser(${val.id})" >Delete</button>
+                <button class="px-6 cursor-pointer bg-blue-950 border border-white/20 rounded-md p-1" onclick="updUser(${val.id})" >Update</button>
             </div>
         </div>`;
                 main.innerHTML += card;
@@ -54,7 +54,6 @@
 
         form.addEventListener("submit", (e) => {
             e.preventDefault();
-            alert("hello")
             const name = e.target[0].value;
             const email = e.target[1].value;
             const imageUrl = e.target[2].value;
@@ -80,26 +79,27 @@
             }
 
             
-            
+            form.reset();
             render();
         })
 
 
-        function delUser(id){
-            if(!id) return;
-            Users = Users.filter((val)=>val.id != id);
-
+        function delUser(idx){
+            if(!idx) return;
+            Users = Users.filter((val)=>val.id != idx);
+            console.log(Users);
             render();
         }
 
-        function updateUser(id){
-            if(!id) return;
-            let user = Users.find((val)=>val.id == id);
-            updateUser = id;
+        function updUser(idx){
+            alert("Are you sure you want to update this user?");
+            if(!idx) return;
+            let user = Users.find((val)=>val.id == idx);
+            updateUser = idx;
 
-            form[0] = user.name;
-            form[1] = user.email;
-            form[2] = user.imageUrl;
+            form[0].value = user.name;
+            form[1].value  = user.email;
+            form[2].value  = user.imageUrl;
         }
 
     </script>
