@@ -27,7 +27,7 @@
     <script>
         const form = document.getElementById("form");
         const main = document.getElementById("main");
-        let Users = [];
+        let Users = localStorage.getItem("Users")?JSON.parse(localStorage.getItem("Users")):[];
 
         let updateUser;
 
@@ -78,7 +78,7 @@
                 Users.push(User);
             }
 
-            
+             localStorage.setItem("Users", JSON.stringify(Users));
             form.reset();
             render();
         })
@@ -87,6 +87,7 @@
         function delUser(idx){
             if(!idx) return;
             Users = Users.filter((val)=>val.id != idx);
+            localStorage.setItem("Users", JSON.stringify(Users));
             console.log(Users);
             render();
         }
@@ -96,11 +97,13 @@
             if(!idx) return;
             let user = Users.find((val)=>val.id == idx);
             updateUser = idx;
-
+            localStorage.setItem("Users", JSON.stringify(Users));
             form[0].value = user.name;
             form[1].value  = user.email;
             form[2].value  = user.imageUrl;
         }
+
+        render();
 
     </script>
 
