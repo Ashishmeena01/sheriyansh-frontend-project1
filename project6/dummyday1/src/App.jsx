@@ -6,7 +6,11 @@ import './App.css'
 
 function App() {
   const [count, setCount] = useState(0)
-
+  console.log('App rendered')
+  const handleClick = () => {
+    setCount((count) => count + 1);
+    setCount(3);
+  }
   return (
     <>
       <section id="center">
@@ -24,7 +28,7 @@ function App() {
         <button
           type="button"
           className="counter"
-          onClick={() => setCount((count) => count + 1)}
+          onClick={handleClick}
         >
           Count is {count}
         </button>
