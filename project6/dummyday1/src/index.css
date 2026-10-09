@@ -23,7 +23,7 @@
 
 /* LIGHT THEME */
 :root {
-  --background: #ffffff;
+  --background: #eef8f5;
   --foreground: #000000;
 
   --card: #fafafa;
@@ -43,7 +43,7 @@
 
 /* DARK THEME */
 .dark {
-  --background: #1e1b1b;
+  --background: #09091a;
   --foreground: #ffffff;
 
   --card: #151414;
@@ -82,4 +82,23 @@
       color 0.2s ease,
       border-color 0.2s ease;
   }
+}
+
+
+::view-transition-old(root),
+::view-transition-new(root) {
+  animation: none;
+  mix-blend-mode: normal;
+}
+
+::view-transition-new(root) {
+  z-index: 9999;
+}
+
+ .dark::view-transition-old(root) {
+  z-index: 1;
+}
+
+.dark::view-transition-new(root) {
+  z-index: 9999;
 }
