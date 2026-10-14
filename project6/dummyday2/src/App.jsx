@@ -1,41 +1,30 @@
-import { createContext, useState } from 'react'
+import { useContext } from 'react'
 import './App.css'
-import { useForm } from 'react-hook-form'
-import { crxCx, useCx } from './context/TestContext';
-import {Prd} from "./context/TestContext"
+import Navbar from './components/Navbar'
+import ProductCard from './components/ProductCard'
+import { MyStore } from './context/myStore'
+import Cart from './components/Cart'
 
-let Cx = crxCx({ name: "ashish" }); 
-let cx1 = createContext();
-// console.log(cx.Provider)
-console.log(<Prd/>);
-
-
-function Test() {
-  const {data} = useCx(Cx);
-  console.log(data);
-  return(<><div>{data}</div></>)
-}
 
 function App() {
-  // console.log(<div></div>)
+  const { productData, isCart} = useContext(MyStore);
+
   return (
-    // <CtxDummy>
-      <div className='w-full h-screen flex items-center justify-center'>
-        {/* <Form /> */}
-        {/* <Test></Test> */}
+    <>
+      <Navbar />
+      <div className='w-full h-screen flex flex-wrap gap-2 items-center justify-center'>
+        {
+          isCart && productData && productData.map((data)=><ProductCard key={data.id}  product={data}/>)
+        }
+       { 
+         !isCart && <Cart/>
+       }
+        
       </div>
-    // </CtxDummy>
+    </>
   )
 }
 
 
-function CtxDummy({ children }) {
-  const [data, setData] = useState(0);
-  return (
-    <Cx.Provider value={data}>
-      {children}
-    </Cx.Provider>
-  )
-}
 
 export default App
