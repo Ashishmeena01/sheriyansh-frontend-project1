@@ -11,13 +11,14 @@ import {
 import axios from "axios";
 import { useParams } from "react-router-dom";
 import { MyStore } from "../context/myStore";
+import { useAuth } from "../context/auth";
 
 export default function ProductPage() {
     const [product, setProduct] = useState(null);
     const [quantity, setQuantity] = useState(1);
     const [added, setAdded] = useState(false);
     const {id} = useParams();
-    const {setProductData} = useContext(MyStore);
+    const {setProductData} = useAuth();
 
     
     const handleAddToCart = () => {
