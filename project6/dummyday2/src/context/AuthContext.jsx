@@ -1,7 +1,7 @@
 import React, { createContext, useContext, useState } from 'react'
 
 
-const AuthCnx = createContext();
+const AuthContext = createContext();
 
 
 function AuthProvider({children}) {
@@ -19,14 +19,14 @@ function AuthProvider({children}) {
 
 
   return (
-    <AuthCnx.Provider value={{LogedInUser,setIsLogedInUser,registeredUser,setRegisteredUser}}>
+    <AuthContext.Provider value={{LogedInUser,setIsLogedInUser,registeredUser,setRegisteredUser}}>
         {children}
-    </AuthCnx.Provider>
+    </AuthContext.Provider>
   )
 }
 
 
-const useAuth = ()=> useContext(AuthCnx);
+const useAuth = ()=> useContext(AuthContext);
 
 export {useAuth};
 export default AuthProvider
