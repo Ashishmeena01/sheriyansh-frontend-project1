@@ -2,8 +2,8 @@ import axios from 'axios';
 import { createContext, useEffect, useState } from 'react'
 
 
-const MyStore = createContext();
-function ContextProvider({ children }) {
+const StoreContext = createContext();
+function StoreProvider({ children }) {
     const [productData, setProductData] = useState([])
     const [isCart, setIsCart] = useState(true);
    
@@ -23,13 +23,13 @@ function ContextProvider({ children }) {
     }, [])
 
     return (
-        <MyStore.Provider value={{ productData, isCart, setIsCart, setProductData}}>
+        <StoreContext.Provider value={{ productData, isCart, setIsCart, setProductData}}>
             {
                 children
             }
-        </MyStore.Provider>
+        </StoreContext.Provider>
     )
 }
 
-export { MyStore }
-export default ContextProvider
+export { StoreContext }
+export default StoreProvider
