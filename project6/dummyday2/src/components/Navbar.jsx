@@ -1,9 +1,14 @@
 import { useContext } from "react";
 import { MyStore } from "../context/myStore";
+import { useAuth } from "../context/auth";
+import { Navigate } from "react-router-dom";
 
 
 function Navbar() {
     const {isCart,setIsCart} = useContext(MyStore);
+    const { LogedInUser, setIsLogedInUser } = useAuth();
+
+    if(!LogedInUser) return <Navigate to={"/login"}></Navigate>
 
     return (
         <nav className="flex sticky top-0 items-center justify-between bg-black px-6 py-4 text-white">
@@ -19,9 +24,16 @@ function Navbar() {
             </div>
 
             {/* Button */}
-            <button onClick={()=>{setIsCart((val)=>!val)}} className="rounded bg-white px-4 py-2 text-black hover:bg-gray-200">
-               {isCart ? "Cart" : "Cards"}
-            </button>
+            <div className="flex gap-1">
+                <button onClick={() => { setIsCart((val) => !val) }} className="rounded bg-white px-4 py-2 text-black hover:bg-gray-200">
+                    {isCart ? "Cart" : "Cards"}
+                </button>
+                <button onClick={()=>{
+                    setIsLogedInUser(null);
+                    localStorage.removeItem("LogedInUser");
+                }} className="rounded bg-white px-4 py-2 text-black hover:bg-gray-200">LogOut</button>
+            </div>
+            
         </nav>
     );
 }
