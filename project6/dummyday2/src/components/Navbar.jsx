@@ -1,11 +1,11 @@
 import { useContext } from "react";
-import { MyStore } from "../context/myStore";
-import { useAuth } from "../context/auth";
+import { StoreContext } from "../context/StoreContext";
+import { useAuth } from "../context/AuthContext";
 import { Navigate } from "react-router-dom";
 
 
 function Navbar() {
-    const {isCart,setIsCart} = useContext(MyStore);
+    const {isCart,setIsCart} = useContext(StoreContext);
     const { LogedInUser, setIsLogedInUser } = useAuth();
 
     if(!LogedInUser) return <Navigate to={"/login"}></Navigate>
