@@ -1,7 +1,7 @@
-import { useContext, useState } from "react";
-import { Link, useNavigate } from "react-router-dom";
+import { useState } from "react";
+import { Link } from "react-router-dom";
 import { useForm } from "react-hook-form";
-import { MyStore } from "../context/myStore";
+import { useAuth } from "../context/AuthContext";
 import { ToastContainer,toast } from "react-toastify";
 export default function Register() {
     const notify = () => toast("User already exits you need to login!");
@@ -19,7 +19,7 @@ export default function Register() {
 
     const [showPassword, setShowPassword] = useState(false);
 
-    const { registeredUser, setRegisteredUser } = useContext(MyStore);
+    const { registeredUser, setRegisteredUser } = useAuth();
 
     function handleRegisterationSubmit(val) {
 
