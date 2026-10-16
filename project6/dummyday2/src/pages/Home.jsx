@@ -1,11 +1,11 @@
 import { useContext } from 'react'
 import Navbar from '../components/Navbar'
-import { MyStore } from '../context/myStore';
+import { StoreContext } from '../context/StoreContext';
 import Cart from "../components/Cart"
 import ProductCard from '../components/ProductCard';
 
 function Home() {
-    const { productData, isCart } = useContext(MyStore);
+    const { productData, isCart } = useContext(StoreContext);
     return (
         <>
             <Navbar />
