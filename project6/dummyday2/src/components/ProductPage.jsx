@@ -10,15 +10,14 @@ import {
 } from "lucide-react";
 import axios from "axios";
 import { useParams } from "react-router-dom";
-import { MyStore } from "../context/myStore";
-import { useAuth } from "../context/auth";
+import { StoreContext } from "../context/StoreContext";
 
 export default function ProductPage() {
     const [product, setProduct] = useState(null);
     const [quantity, setQuantity] = useState(1);
     const [added, setAdded] = useState(false);
     const {id} = useParams();
-    const {setProductData} = useAuth();
+    const { setProductData } = useContext(StoreContext);
 
     
     const handleAddToCart = () => {
