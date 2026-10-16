@@ -1,9 +1,9 @@
 import { useContext } from "react";
-import { MyStore } from "../context/myStore";
+import { StoreContext } from "../context/StoreContext";
 import { useNavigate } from "react-router-dom";
 
 function ProductCard({product}) {
-    const { setProductData} = useContext(MyStore);
+    const { setProductData} = useContext(StoreContext);
     const navigate = useNavigate();
 
     return (
