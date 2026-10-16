@@ -1,9 +1,9 @@
 
 import { useContext, useState } from "react";
-import { MyStore } from "../context/myStore";
+import { StoreContext } from "../context/StoreContext";
 
 function CartCard({item}){
-    const {setProductData} = useContext(MyStore)
+    const {setProductData} = useContext(StoreContext)
 
     function updateQuantity(c) {
         setProductData((prevCart) =>
@@ -72,7 +72,7 @@ function CartCard({item}){
 
 
 function Cart() {
-    const { productData, setProductData } = useContext(MyStore)
+    const { productData, setProductData } = useContext(StoreContext)
 
     
 
