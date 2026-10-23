@@ -1,9 +1,8 @@
-import React from 'react'
 import { Outlet } from 'react-router'
-import Navbar from "../components/Navbar"
 
 
 function AppLayout() {
+  console.log("app layout")
   return (
     <div className='flex gap-2 flex-col'>
       <Outlet/>

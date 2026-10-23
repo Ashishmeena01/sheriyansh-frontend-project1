@@ -1,86 +1,61 @@
-import { useState } from "react";
-import { Link } from "react-router";
+import { useEffect, useState } from "react";
+import { Link, NavLink } from "react-router";
 import { useAuth } from "../context/AuthContext";
 
 function Navbar() {
-  const [theme, setTheme] = useState('light');
+  const [theme, setTheme] = useState(() => localStorage.getItem("theme") || "light");
   const { logOut } = useAuth();
 
-  function h() {
-    setTheme((prev) => {
-      const nextTheme = prev === 'dark' ? 'light' : 'dark';
-      document.documentElement.classList.toggle('dark', nextTheme === 'dark');
-      return nextTheme;
-    });
+  useEffect(() => {
+    document.documentElement.classList.toggle("dark", theme === "dark");
+    localStorage.setItem("theme", theme);
+  }, [theme]);
+
+  function toggleTheme() {
+    const toggle = () => setTheme((current) => current === "dark" ? "light" : "dark");
+    if (document.startViewTransition) document.startViewTransition(toggle);
+    else toggle();
   }
 
-  function changeTheme() {
-    if (!document.startViewTransition) {
-      h();
-      return;
-    }
-
-   
-
-    const t = document.startViewTransition(h);
-
-    t.ready.then(() => {
-      // Animate clip-path from 0px to cover screen
-      document.documentElement.animate(
-        {
-          clipPath: [
-            `inset(0px 0px 100% 0)`,
-            `inset(0px 0px 0px 0px round 0px)`
-          ]
-        },
-        {
-          duration: 500,
-          easing: 'ease-in-out',
-          pseudoElement: '::view-transition-new(root)'
-        }
-      );
-    });
-  }
+  const linkClass = ({ isActive }) =>
+    `rounded-lg px-3 py-2 text-sm font-medium transition ${isActive ? "bg-secondary text-secondary-foreground" : "text-muted-foreground hover:bg-secondary hover:text-foreground"}`;
 
   return (
-    <nav className="bg-card sticky top-0 left-0 border-border text-foreground flex w-40 flex-col h-screen items-center justify-between rounded-2xl border px-5 py-4 shadow-sm sm:px-6 ">
-      <div>
-        <p className="text-muted-foreground text-xs font-semibold uppercase tracking-[0.2em]">People</p>
-        <div className="text-xl font-bold tracking-tight sm:text-2xl">User Manager</div>
+    <nav className="bg-card border-border z-10 flex w-full shrink-0 flex-col gap-5 border-b px-4 py-4 shadow-sm md:sticky md:top-0 md:h-screen md:w-60 md:justify-between md:border-r md:border-b-0 md:px-5 md:py-6">
+      <div className="flex items-center justify-between gap-4 md:block">
+        <Link to="/" className="block">
+          <p className="text-muted-foreground text-xs font-semibold uppercase tracking-[0.18em]">People</p>
+          <span className="text-foreground text-xl font-bold tracking-tight">User Manager</span>
+        </Link>
+        <button
+          type="button"
+          onClick={toggleTheme}
+          aria-label={`Switch to ${theme === "dark" ? "light" : "dark"} theme`}
+          className="border-border text-foreground rounded-lg border px-3 py-2 text-sm font-semibold transition hover:bg-secondary md:hidden"
+        >
+          {theme === "dark" ? "Light mode" : "Dark mode"}
+        </button>
       </div>
 
-      <div className="flex flex-col gap-2">
-        <Link className={(val)=>{
-          console.log(val )
-          return "text-gray-200"
-        }}  to="/">Home</Link>
-        <Link to={"products"}>Products</Link>
-        <Link to="users">User</Link>
+      <div className="flex flex-wrap gap-2 md:flex-col">
+        <NavLink to="/" end className={linkClass}>Home</NavLink>
+        <NavLink to="/products" className={linkClass}>Products</NavLink>
+        <NavLink to="/users" className={linkClass}>Users</NavLink>
       </div>
 
-      <div className="flex gap-2 flex-col">
-        <Link to="/users/new" className="bg-primary text-primary-foreground rounded-lg px-4 py-2 text-sm font-semibold capitalize transition hover:opacity-80 sm:px-5">
+      <div className="flex flex-wrap gap-2 md:flex-col">
+        <Link to="/users/new" className="bg-primary text-primary-foreground rounded-lg px-4 py-2.5 text-center text-sm font-semibold transition hover:opacity-90">
           Add person
         </Link>
-
-        {/* Theme Button */}
-        <button
-          onClick={changeTheme}
-          className="border-border text-foreground cursor-pointer rounded-lg border px-4 py-2 text-sm font-semibold capitalize transition hover:bg-secondary sm:px-5"
-        >
-          {theme}
+        <button type="button" onClick={toggleTheme} className="border-border text-foreground hidden rounded-lg border px-4 py-2.5 text-sm font-semibold transition hover:bg-secondary md:block">
+          {theme === "dark" ? "Light theme" : "Dark theme"}
         </button>
-
-        <button
-          onClick={logOut}
-          className="border-border text-foreground cursor-pointer rounded-lg border px-4 py-2 text-sm font-semibold capitalize transition hover:bg-secondary sm:px-5"
-        >
-          LogOut
+        <button type="button" onClick={logOut} className="border-border text-foreground rounded-lg border px-4 py-2.5 text-sm font-semibold transition hover:bg-secondary">
+          Log out
         </button>
       </div>
     </nav>
   );
 }
-
 
 export default Navbar;
