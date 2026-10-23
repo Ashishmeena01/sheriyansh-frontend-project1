@@ -1,4 +1,4 @@
-import { createContext, useEffect, useState } from "react";
+import { createContext, useState } from "react";
 
 
 
@@ -47,25 +47,7 @@ function AppContext({children}) {
 
 
 
-    const [userData, setUserData] = useState(() => {
-        try {
-            const savedData = localStorage.getItem('user-data');
-            const parsedData = savedData === null ? null : JSON.parse(savedData);
-            const hasLoadedStarterData = localStorage.getItem('user-data-starter-loaded') === 'true';
-
-            return parsedData === null || (parsedData.length === 0 && !hasLoadedStarterData)
-                ? starterUsers
-                : parsedData;
-        } catch {
-            return starterUsers;
-        }
-    });
-
-
-    useEffect(() => {
-        localStorage.setItem('user-data', JSON.stringify(userData));
-        localStorage.setItem('user-data-starter-loaded', 'true');
-    }, [userData]);
+    const [userData, setUserData] = useState(starterUsers);
 
     function deleteUser(id) {
         setUserData((prev) => prev.filter((user) => user.id !== id));
