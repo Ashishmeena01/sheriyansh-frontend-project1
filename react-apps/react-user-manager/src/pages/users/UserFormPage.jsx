@@ -1,7 +1,7 @@
 import { useContext, useEffect, useState } from "react";
 import { Link, useNavigate, useParams } from "react-router";
 import { nanoid } from "nanoid";
-import { AcX } from "../context/AppContext";
+import { AcX } from "../../context/AppContext";
 
 const emptyForm = { name: "", about: "", url: "" };
 
